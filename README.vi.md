@@ -241,6 +241,40 @@ graph TD
 
 </details>
 
+<details open>
+<summary><b>Tuần 04 - Phong Cách Kiến Trúc (Layered + Microkernel)</b></summary>
+
+### 🧩 Hệ Thống CMS Dạng Plugin
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Tài Liệu Kiến Trúc**
+- Layered Architecture (C4 Container)
+- Microkernel Architecture (C4 Container)
+- Phân tích trade-off giữa 2 style
+- Giải thích style phù hợp nhất cho CMS
+
+</td>
+<td width="50%" valign="top">
+
+**Triển Khai Hệ Thống**
+- Full-stack CMS (Frontend + Backend + Database)
+- Plugin manager hỗ trợ bật/tắt plugin runtime
+- SEO plugin tạo metadata tự động
+- Audit plugin ghi log vòng đời nội dung
+
+</td>
+</tr>
+</table>
+
+**Tech Stack:** Node.js, Express, PostgreSQL, Docker Compose
+
+**[📁 Xem Chi Tiết Tuần 04](week04/)**
+
+</details>
+
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng
@@ -260,9 +294,11 @@ graph TD
 ### Databases & Cache
 ![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat-square&logo=redis&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat-square&logo=postgresql&logoColor=white)
 
 - **MongoDB 7.0** - Document database
 - **Redis 7.0** - In-memory data store
+- **PostgreSQL 16** - CSDL quan hệ cho CMS
 
 ### Message Broker
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.12-FF6600?style=flat-square&logo=rabbitmq&logoColor=white)
@@ -421,6 +457,32 @@ mvn spring-boot:run
 
 </details>
 
+### 🧩 Tuần 04 - Phong Cách Kiến Trúc
+
+<details>
+<summary>Click để xem hướng dẫn cài đặt</summary>
+
+```bash
+cd week04/plugin-cms
+
+# Chạy full stack (PostgreSQL + CMS app)
+docker-compose up --build
+
+# App UI
+# http://localhost:4000
+```
+
+**Tài liệu kiến trúc:**
+- `week04/architecture/layered-container.dsl`
+- `week04/architecture/microkernel-container.dsl`
+- `week04/architecture/style-tradeoff.md`
+
+**Truy cập Demo:**
+- App UI: http://localhost:4000
+- Health: http://localhost:4000/api/health
+
+</details>
+
 ---
 
 ## 📊 Cấu Trúc Project
@@ -471,6 +533,19 @@ asd-lab/
 │   │       └── controller/
 │   ├── ex2/                          # Phân tích kiến trúc
 │   └── ex3/                          # C4 Diagrams
+│
+├── week04/
+│   ├── README.md                     # Tổng quan tuần 4
+│   ├── cms-specification.md          # Đặc tả chi tiết CMS
+│   ├── architecture/
+│   │   ├── layered-container.dsl     # C4 container: layered style
+│   │   ├── microkernel-container.dsl # C4 container: microkernel style
+│   │   └── style-tradeoff.md         # So sánh và chọn style
+│   └── plugin-cms/                   # Triển khai CMS full-stack
+│       ├── docker-compose.yml
+│       ├── package.json
+│       ├── public/
+│       └── src/
 │
 └── README.md                         # File này
 ```

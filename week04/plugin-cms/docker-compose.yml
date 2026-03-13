@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: week04-cms-db
+    environment:
+      POSTGRES_USER: cms_user
+      POSTGRES_PASSWORD: cms_password
+      POSTGRES_DB: plugin_cms
+    ports:
+      - "5432:5432"
+    volumes:
+      - cms_postgres_data:/var/lib/postgresql/data
+
+  cms-app:
+    build: .
+    container_name: week04-cms-app
+    depends_on:
+      - db
+    environment:
+      PORT: 4000
+      DATABASE_URL: postgresql://cms_user:cms_password@db:5432/plugin_cms
+    ports:
+      - "4000:4000"
+
+volumes:
+  cms_postgres_data:

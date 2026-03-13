@@ -241,6 +241,40 @@ graph TD
 
 </details>
 
+<details open>
+<summary><b>Week 04 - Architecture Styles (Layered + Microkernel)</b></summary>
+
+### 🧩 Plugin-based CMS
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Architecture Artifacts**
+- Layered Architecture (C4 Container View)
+- Microkernel Architecture (C4 Container View)
+- Style trade-off analysis
+- Recommended style rationale for CMS
+
+</td>
+<td width="50%" valign="top">
+
+**Implementation**
+- Full-stack CMS (Frontend + Backend + Database)
+- Plugin manager with runtime toggle
+- SEO plugin (metadata generation)
+- Audit plugin (content lifecycle logging)
+
+</td>
+</tr>
+</table>
+
+**Tech Stack:** Node.js, Express, PostgreSQL, Docker Compose
+
+**[📁 View Week 04 Details](week04/)**
+
+</details>
+
 ---
 
 ## 🛠️ Technology Stack
@@ -260,9 +294,11 @@ graph TD
 ### Databases & Cache
 ![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat-square&logo=redis&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat-square&logo=postgresql&logoColor=white)
 
 - **MongoDB 7.0** - Document database
 - **Redis 7.0** - In-memory data store
+- **PostgreSQL 16** - Relational database for CMS
 
 ### Message Broker
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.12-FF6600?style=flat-square&logo=rabbitmq&logoColor=white)
@@ -374,6 +410,32 @@ mvn spring-boot:run
 
 </details>
 
+### 🧩 Week 04 - Architecture Styles
+
+<details>
+<summary>Click to expand setup instructions</summary>
+
+```bash
+cd week04/plugin-cms
+
+# Start full stack (PostgreSQL + CMS app)
+docker-compose up --build
+
+# App UI
+# http://localhost:4000
+```
+
+**Architecture Artifacts:**
+- `week04/architecture/layered-container.dsl`
+- `week04/architecture/microkernel-container.dsl`
+- `week04/architecture/style-tradeoff.md`
+
+**Access Demo:**
+- App UI: http://localhost:4000
+- Health: http://localhost:4000/api/health
+
+</details>
+
 ---
 
 ## 📚 Documentation & Resources
@@ -465,6 +527,19 @@ asd-lab/
 │   │       └── controller/
 │   ├── ex2/                          # Architecture Analysis
 │   └── ex3/                          # C4 Diagrams
+│
+├── week04/
+│   ├── README.md                     # Week 04 overview
+│   ├── cms-specification.md          # Detailed CMS specification
+│   ├── architecture/
+│   │   ├── layered-container.dsl     # C4 container: layered style
+│   │   ├── microkernel-container.dsl # C4 container: microkernel style
+│   │   └── style-tradeoff.md         # Style comparison and recommendation
+│   └── plugin-cms/                   # Full-stack CMS implementation
+│       ├── docker-compose.yml
+│       ├── package.json
+│       ├── public/
+│       └── src/
 │
 └── README.md                         # This file
 ```
