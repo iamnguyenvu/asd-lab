@@ -1,25 +1,27 @@
-workspace "Plugin CMS - Layered Architecture" "C4 Container view for layered architecture" {
+workspace "Plugin CMS - Layered Architecture" "C4 Container view with explicit standard layers" {
   model {
     editor = person "Content Editor" "Creates and publishes content"
     admin = person "System Admin" "Manages plugins"
 
-    cms = softwareSystem "Plugin-based CMS" "Content platform with layered architecture" {
-      webUi = container "CMS Web UI" "Browser-based dashboard for content and plugin management" "HTML/CSS/JavaScript"
-      cmsApi = container "CMS Backend API" "Implements layered design internally: presentation, application, domain, infrastructure" "Node.js + Express"
-      database = container "PostgreSQL" "Stores contents, plugin states, and audit logs" "PostgreSQL"
+    cms = softwareSystem "Plugin-based CMS" "CMS designed using layered architecture" {
+      presentationLayer = container "Presentation Layer" "Web UI and HTTP controllers for editor/admin interactions" "HTML/CSS/JavaScript + Express Controllers"
+      businessLayer = container "Business Layer" "Content lifecycle rules, publishing workflow, and plugin orchestration" "Node.js Services"
+      dataAccessLayer = container "Data Access Layer" "Repositories and database access logic" "Node.js + pg"
+      database = container "PostgreSQL" "Stores content, plugin state, and audit logs" "PostgreSQL"
     }
 
-    editor -> webUi "Creates and publishes content"
-    admin -> webUi "Enables/disables plugins"
-    webUi -> cmsApi "Uses REST/JSON"
-    cmsApi -> database "Reads and writes data via SQL"
+    editor -> presentationLayer "Creates and publishes content"
+    admin -> presentationLayer "Enables/disables plugins"
+    presentationLayer -> businessLayer "Invokes use cases"
+    businessLayer -> dataAccessLayer "Requests persistence"
+    dataAccessLayer -> database "Reads/writes via SQL"
   }
 
   views {
     container cms {
       include *
       autolayout tb
-      title "Layered Architecture - Container View"
+      title "Layered Architecture - C4 Container View"
     }
 
     theme default
