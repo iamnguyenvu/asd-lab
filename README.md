@@ -275,6 +275,50 @@ graph TD
 
 </details>
 
+<details open>
+<summary><b>Week 05 - Docker Compose and Distributed Architecture</b></summary>
+
+### 🚚 Online Food Delivery: Monolith to Microservices Journey
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Exercise 02 - Docker Compose Practice**
+- Part 1: Core Docker Compose commands
+- Part 2: 15 guided compose scenarios
+- Part 3: 10 advanced multi-service exercises
+
+**Exercise 03 - Distributed Design Deliverables**
+- Service map
+- Context map with bounded contexts
+- Sync vs Async communication diagram
+- Event messaging model (Kafka or RabbitMQ)
+
+</td>
+<td width="50%" valign="top">
+
+**Exercise 04 - Monolith Full-stack**
+- React frontend + Spring Boot backend + PostgreSQL
+- 3 core functions:
+  - View menu
+  - Place order
+  - Track or update order status
+
+**Exercise 05 - Microservices Full-stack**
+- API Gateway + Catalog Service + Order Service + Frontend + PostgreSQL
+- Same 3 core functions with service decomposition
+
+</td>
+</tr>
+</table>
+
+**Tech Stack:** Spring Boot, React, PostgreSQL, Docker Compose, API Gateway, Event-driven design
+
+**[📁 View Week 05 Details](week05/)**
+
+</details>
+
 ---
 
 ## 🛠️ Technology Stack
@@ -436,6 +480,37 @@ docker-compose up --build
 
 </details>
 
+### 🚚 Week 05 - Docker Compose and Distributed Architecture
+
+<details>
+<summary>Click to expand setup instructions</summary>
+
+```bash
+cd week05
+
+# Exercise 02: Docker Compose practice set
+cd ex02
+
+# Exercise 03: Distributed architecture artifacts
+cd ../ex03
+
+# Exercise 04: Monolith full-stack app
+cd ../ex04
+docker compose up --build
+
+# Exercise 05: Microservices full-stack app
+cd ../ex05
+docker compose up --build
+```
+
+**Exercise Links:**
+- Week 05 overview: `week05/README.md`
+- Ex03 architecture deliverables: `week05/ex03/docs`
+- Ex04 monolith app: `week05/ex04`
+- Ex05 microservices app: `week05/ex05`
+
+</details>
+
 ---
 
 ## 📚 Documentation & Resources
@@ -540,6 +615,21 @@ asd-lab/
 │       ├── package.json
 │       ├── public/
 │       └── src/
+│
+├── week05/
+│   ├── README.md                     # Week 05 overview
+│   ├── ex01/                         # Week 05 evidence assets
+│   ├── ex02/                         # Docker Compose practice (part1/2/3)
+│   ├── ex03/                         # Distributed architecture design docs
+│   │   └── docs/
+│   ├── ex04/                         # Monolith full-stack food delivery
+│   │   ├── backend/
+│   │   └── frontend/
+│   └── ex05/                         # Microservices full-stack food delivery
+│       ├── api-gateway/
+│       ├── catalog-service/
+│       ├── order-service/
+│       └── frontend/
 │
 └── README.md                         # This file
 ```

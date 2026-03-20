@@ -275,6 +275,50 @@ graph TD
 
 </details>
 
+<details open>
+<summary><b>Tuần 05 - Docker Compose và Kiến Trúc Phân Tán</b></summary>
+
+### 🚚 Online Food Delivery: Hành Trình Monolith đến Microservices
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Bài 02 - Thực hành Docker Compose**
+- Phần 1: Các lệnh Docker Compose cơ bản
+- Phần 2: 15 bài compose theo tình huống
+- Phần 3: 10 bài tập đa dịch vụ nâng cao
+
+**Bài 03 - Deliverable kiến trúc phân tán**
+- Service map
+- Context map và bounded context
+- Sơ đồ giao tiếp Sync vs Async
+- Mô hình event messaging (Kafka hoặc RabbitMQ)
+
+</td>
+<td width="50%" valign="top">
+
+**Bài 04 - Monolith Full-stack**
+- Frontend React + Backend Spring Boot + PostgreSQL
+- 3 chức năng chính:
+  - Xem menu
+  - Tạo đơn hàng
+  - Theo dõi hoặc cập nhật trạng thái đơn
+
+**Bài 05 - Microservices Full-stack**
+- API Gateway + Catalog Service + Order Service + Frontend + PostgreSQL
+- Giữ nguyên 3 chức năng chính theo hướng tách dịch vụ
+
+</td>
+</tr>
+</table>
+
+**Tech Stack:** Spring Boot, React, PostgreSQL, Docker Compose, API Gateway, thiết kế hướng sự kiện
+
+**[📁 Xem Chi Tiết Tuần 05](week05/)**
+
+</details>
+
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng
@@ -483,6 +527,37 @@ docker-compose up --build
 
 </details>
 
+### 🚚 Tuần 05 - Docker Compose và Kiến Trúc Phân Tán
+
+<details>
+<summary>Click để xem hướng dẫn cài đặt</summary>
+
+```bash
+cd week05
+
+# Bài 02: Bộ bài thực hành Docker Compose
+cd ex02
+
+# Bài 03: Tài liệu kiến trúc phân tán
+cd ../ex03
+
+# Bài 04: Ứng dụng monolith full-stack
+cd ../ex04
+docker compose up --build
+
+# Bài 05: Ứng dụng microservices full-stack
+cd ../ex05
+docker compose up --build
+```
+
+**Liên kết bài tập:**
+- Tổng quan tuần 5: `week05/README.md`
+- Deliverable kiến trúc ex03: `week05/ex03/docs`
+- Ứng dụng monolith ex04: `week05/ex04`
+- Ứng dụng microservices ex05: `week05/ex05`
+
+</details>
+
 ---
 
 ## 📊 Cấu Trúc Project
@@ -546,6 +621,21 @@ asd-lab/
 │       ├── package.json
 │       ├── public/
 │       └── src/
+│
+├── week05/
+│   ├── README.md                     # Tổng quan tuần 5
+│   ├── ex01/                         # Ảnh minh chứng tuần 5
+│   ├── ex02/                         # Bộ bài Docker Compose (part1/2/3)
+│   ├── ex03/                         # Thiết kế kiến trúc phân tán
+│   │   └── docs/
+│   ├── ex04/                         # Food delivery monolith full-stack
+│   │   ├── backend/
+│   │   └── frontend/
+│   └── ex05/                         # Food delivery microservices full-stack
+│       ├── api-gateway/
+│       ├── catalog-service/
+│       ├── order-service/
+│       └── frontend/
 │
 └── README.md                         # File này
 ```
