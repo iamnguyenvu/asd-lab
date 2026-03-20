@@ -1,0 +1,35 @@
+﻿services:
+  traefik:
+    image: traefik:v3.1
+    command:
+      - --providers.docker=true
+      - --api.insecure=true
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8087:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  flask-app:
+    image: tiangolo/uwsgi-nginx-flask:python3.11
+    labels:
+      - traefik.http.routers.flask.rule=Host(`flask.local`)
+      - traefik.http.services.flask.loadbalancer.server.port=80
+  wordpress:
+    image: wordpress:latest
+    environment:
+      WORDPRESS_DB_HOST: wp-db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wpdb
+    depends_on: [wp-db]
+    labels:
+      - traefik.http.routers.wordpress.rule=Host(`wp.local`)
+      - traefik.http.services.wordpress.loadbalancer.server.port=80
+  wp-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+      MYSQL_ROOT_PASSWORD: root

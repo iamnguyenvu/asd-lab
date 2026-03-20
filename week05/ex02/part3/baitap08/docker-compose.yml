@@ -1,0 +1,19 @@
+﻿services:
+  django:
+    build: ./django-app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django-app:/app
+    ports:
+      - "8000:8000"
+    depends_on: [redis]
+  celery:
+    build: ./django-app
+    command: celery -A core worker -l info
+    volumes:
+      - ./django-app:/app
+    depends_on: [redis]
+  redis:
+    image: redis:latest
+    ports:
+      - "6381:6379"

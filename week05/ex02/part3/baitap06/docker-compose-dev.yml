@@ -1,0 +1,13 @@
+﻿services:
+  app:
+    build: ./app
+    volumes:
+      - ./app:/app
+    command: npm run dev
+    ports:
+      - "3003:3000"
+  tests:
+    build: ./app
+    volumes:
+      - ./app:/app
+    command: npm test

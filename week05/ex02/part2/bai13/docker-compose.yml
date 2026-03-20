@@ -1,0 +1,5 @@
+﻿services:
+  react-app:
+    build: ./react-app
+    ports:
+      - "8086:80"
