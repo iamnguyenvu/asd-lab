@@ -1,0 +1,82 @@
+services:
+  ex04-db:
+    image: postgres:16-alpine
+    container_name: ex04-db
+    environment:
+      POSTGRES_DB: ex04db
+      POSTGRES_USER: ex04user
+      POSTGRES_PASSWORD: ex04pass
+    ports:
+      - "5434:5432"
+    volumes:
+      - ex04_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ex04user -d ex04db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  catalog-service:
+    build:
+      context: ./catalog-service
+      dockerfile: Dockerfile
+    container_name: ex04-catalog-service
+    depends_on:
+      ex04-db:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: 8091
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ex04-db:5432/ex04db
+      SPRING_DATASOURCE_USERNAME: ex04user
+      SPRING_DATASOURCE_PASSWORD: ex04pass
+    ports:
+      - "8091:8091"
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    container_name: ex04-order-service
+    depends_on:
+      ex04-db:
+        condition: service_healthy
+      catalog-service:
+        condition: service_started
+    environment:
+      SERVER_PORT: 8092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ex04-db:5432/ex04db
+      SPRING_DATASOURCE_USERNAME: ex04user
+      SPRING_DATASOURCE_PASSWORD: ex04pass
+      CATALOG_SERVICE_BASE_URL: http://catalog-service:8091/api/catalog/items
+    ports:
+      - "8092:8092"
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: ex04-api-gateway
+    depends_on:
+      - catalog-service
+      - order-service
+    environment:
+      SERVER_PORT: 8084
+      CATALOG_SERVICE_URL: http://catalog-service:8091
+      ORDER_SERVICE_URL: http://order-service:8092
+    ports:
+      - "8084:8084"
+
+  ex04-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_GATEWAY_BASE: http://localhost:8084/api
+    container_name: ex04-frontend
+    depends_on:
+      - api-gateway
+    ports:
+      - "4174:80"
+
+volumes:
+  ex04_pgdata:

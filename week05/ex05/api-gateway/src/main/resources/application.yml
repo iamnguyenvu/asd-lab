@@ -1,0 +1,23 @@
+server:
+  port: ${SERVER_PORT:8084}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: catalog-service
+          uri: ${CATALOG_SERVICE_URL:http://catalog-service:8091}
+          predicates:
+            - Path=/api/catalog/**
+        - id: order-service
+          uri: ${ORDER_SERVICE_URL:http://order-service:8092}
+          predicates:
+            - Path=/api/orders/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
